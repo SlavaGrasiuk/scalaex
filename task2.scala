@@ -1,17 +1,19 @@
 ﻿import scala.List
 
 object code {
-  
   /*
   ==================
-  listCheck
+  appendMath
   	
-  	Проверяет, не пустой ли список
+  	Добавляет список b в конец списка a. Использует match
   ==================
   */
-  private def listCheck(a: List[Any]) = a match {   
-    case Nil => false
-    case _ => true
+  def appendMatch(a: List[Any], b: List[Any]) = a match {   
+    case Nil => "First list is empty"
+    case _ => b match {
+      case Nil => "Second List is empty!"
+      case _ => a ::: b
+    }
   }
   
   /*
@@ -22,9 +24,7 @@ object code {
   ==================
   */
   def append(a: List[Any], b: List[Any]) =
-    if( !listCheck(a) ) "First list empty!"
-    else if( !listCheck(b) ) "Second list is empty!"
-    else a.reverse.foldLeft(b){ (x, y) => y :: x }
+    a.reverse.foldLeft(b){ (x, y) => y :: x }
   
   /*
   ==================
@@ -39,6 +39,7 @@ object code {
     println("List 2 = " + l2)
     
     println("append(l1, l2) = " + append(l1, l2))
+    println("appendMatch(l1, l2) = " + appendMatch(l1, l2))
     
     val l3 = List()
     val l4 = List()
@@ -47,5 +48,6 @@ object code {
     println("List 4 = " + l4)
     
     println("append(l3, l4) = " + append(l3, l4))
+    println("appendMatch(l3, l4) = " + appendMatch(l3, l4))
   }
 }
