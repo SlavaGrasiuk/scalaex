@@ -9,7 +9,7 @@ object code {
   ==================
   */
   def appendMatch(a: List[Any], b: List[Any]) = a match {   
-    case Nil => "First list is empty"
+    case Nil => "First list is empty" 
     case _ => b match {
       case Nil => "Second List is empty!"
       case _ => a ::: b
@@ -49,5 +49,14 @@ object code {
     
     println("append(l3, l4) = " + append(l3, l4))
     println("appendMatch(l3, l4) = " + appendMatch(l3, l4))
+    
+    val l5 = List()
+    val l6 = List(5)
+    
+    println("List 5 = " + l5)
+    println("List 6 = " + l6)
+    
+    println("append(l5, l6) = " + append(l5, l6))
+    println("appendMatch(l5, l6) = " + appendMatch(l5, l6))
   }
 }
