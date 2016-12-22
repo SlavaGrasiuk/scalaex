@@ -8,12 +8,13 @@ object code {
   	Добавляет список b в конец списка a. Использует match
   ==================
   */
-  def appendMatch(a: List[Any], b: List[Any]) = a match {   
-    case Nil => "First list is empty" 
-    case _ => b match {
-      case Nil => "Second List is empty!"
-      case _ => a ::: b
+  def appendMatch(a: List[Any], b: List[Any]) = {
+    def appendMatch_r(a: List[Any], b: List[Any]): List[Any] = a match {  //_r значит рекурсивно
+      case Nil => b
+      case h :: t => appendMatch_r(t, h :: b)
     }
+    
+    appendMatch_r(a.reverse, b)
   }
   
   /*
