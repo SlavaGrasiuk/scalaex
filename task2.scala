@@ -4,13 +4,27 @@ object code {
   
   /*
   ==================
+  listCheck
+  	
+  	Проверяет, не пустой ли список
+  ==================
+  */
+  private def listCheck(a: List[Any]) = a match {   
+    case Nil => false
+    case _ => true
+  }
+  
+  /*
+  ==================
   append
   	
   	Добавляет список b в конец списка a с помощью foldLeft
   ==================
   */
-  def append[ListType](a: List[ListType], b: List[ListType]) = 
-    a.reverse.foldLeft(b){ (x, y) => y :: x }
+  def append(a: List[Any], b: List[Any]) =
+    if( !listCheck(a) ) "First list empty!"
+    else if( !listCheck(b) ) "Second list is empty!"
+    else a.reverse.foldLeft(b){ (x, y) => y :: x }
   
   /*
   ==================
