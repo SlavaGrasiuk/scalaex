@@ -1,6 +1,8 @@
 ﻿import scala.List
 
 object code {
+  type la = List[Any]
+  
   /*
   ==================
   appendMath
@@ -8,13 +10,24 @@ object code {
   	Добавляет список b в конец списка a. Использует match
   ==================
   */
-  def appendMatch(a: List[Any], b: List[Any]) = {
-    def appendMatch_r(a: List[Any], b: List[Any]): List[Any] = a match {  //_r значит рекурсивно
+  def appendMatch(a: la, b: la) = {
+/*  val tmp = a
+    def appendMatch_r(a: la, b: la): la = a match {
+      case Nil => b
+      case h :: Nil => {h :: b; tmp}    //Было бы неплохо, но увы
+      case h :: t => appendMatch_r(t, b)
+    }
+    appendMatch_r(a, b)*/
+    
+    def appendMatch_r(a: la, b: la): la = a match {
       case Nil => b
       case h :: t => appendMatch_r(t, h :: b)
     }
-    
-    appendMatch_r(a.reverse, b)
+    def rev_r(a: la, b: la): la = b match {    //Без разворота, явного или неявного не обойтись.
+      case Nil => a
+      case h :: t => rev_r(h::a, t)
+    }
+    appendMatch_r(rev_r(Nil, a), b)
   }
   
   /*
@@ -24,7 +37,7 @@ object code {
   	Добавляет список b в конец списка a с помощью foldLeft
   ==================
   */
-  def append(a: List[Any], b: List[Any]) =
+  def append(a: la, b: la) =
     a.reverse.foldLeft(b){ (x, y) => y :: x }
   
   /*
@@ -59,5 +72,14 @@ object code {
     
     println("append(l5, l6) = " + append(l5, l6))
     println("appendMatch(l5, l6) = " + appendMatch(l5, l6))
+    
+    val l7 = List(6)
+    val l8 = List()
+    
+    println("List 7 = " + l7)
+    println("List 8 = " + l8)
+    
+    println("append(l7, l8) = " + append(l7, l8))
+    println("appendMatch(l7, l8) = " + appendMatch(l7, l8))
   }
 }
